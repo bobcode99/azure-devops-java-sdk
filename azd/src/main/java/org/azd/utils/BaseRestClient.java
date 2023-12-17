@@ -17,9 +17,9 @@ import java.util.concurrent.CompletableFuture;
 public abstract class BaseRestClient {
     private static final String AUTHORIZATION = "Authorization";
     private static HttpClient.Redirect REDIRECT_POLICY = HttpClient.Redirect.NORMAL;
-    private static final HttpClient CLIENT = HttpClient.newBuilder().followRedirects(REDIRECT_POLICY).build();
-    private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
-
+    // TODO: use variable to control proxy settings
+    private static final HttpClient CLIENT = HttpClient.newBuilder().proxy(ProxySelector.of(new InetSocketAddress("localhost", 8888))).followRedirects(REDIRECT_POLICY).build();
+    private static final HttpClient HTTP_CLIENT = HttpClient.newBuilder().proxy(ProxySelector.of(new InetSocketAddress("localhost", 8888))).build();
     /**
      * Encodes the personal access token to base 64
      *
